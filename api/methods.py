@@ -13,6 +13,11 @@ class ApiMethods:
 
         self.errors = Errors()
 
+    def ok(self, result=None):
+        answer = {'ok': True}
+        answer.update({'result': result}) if result else None
+        return result
+
     def create_user(self, nickname, auth_method, auth_string):
         if self.user_checks.is_nickname_exist(nickname):
             return self.errors.nickname_used()
@@ -21,19 +26,19 @@ class ApiMethods:
 
         self.create_user(nickname=nickname, auth_method=auth_method, auth_string=auth_string)
         new_user = self.user_search.get_user_by_nickname(nickname)
-        return {'ok': True, 'result': new_user}
+        return self.ok(new_user)
 
     def get_user_by_id(self, user_id):
         user = self.user_search.get_user_by_id(user_id)
         if not user:
             return self.errors.user_not_found()
-        return {'ok': True, 'result': user}
+        return self.ok(user)
 
     def get_user_by_nickname(self, nickname):
         user = self.user_search.get_user_by_nickname(nickname)
         if not user:
             return self.errors.user_not_found()
-        return {'ok': True, 'result': user}
+        return self.ok(user)
 
     def add_auth(self, user_id, auth_method, auth_string):
         if not self.user_checks.is_id_exist(user_id):
@@ -42,7 +47,7 @@ class ApiMethods:
             return self.errors.auth_used()
 
         self.user_method.add_auth(user_id, auth_method, auth_string)
-        return {'ok': True}
+        return self.ok()
 
     def update_nickname(self, user_id, nickname):
         user = self.user_search.get_user_by_id(user_id)
@@ -51,13 +56,13 @@ class ApiMethods:
         if self.user_checks.is_nickname_exist(nickname):
             return self.errors.nickname_used()
         self.user_method.update_nickname(user, nickname)
-        return {'ok': True}
+        return self.ok()
 
     def add_connection(self, user_id, connection):
         if not self.user_checks.is_id_exist(user_id):
             return self.errors.user_not_found()
         self.user_method.add_connection(user_id, connection)
-        return {'ok': True}
+        return self.ok()
 
     def remove_auth(self, user_id, auth_method, auth_string):
         if not self.user_checks.is_id_exist(user_id):
@@ -65,7 +70,7 @@ class ApiMethods:
         if not self.user_checks.is_auth_exist(auth_method, auth_string):
             return self.errors.no_auth_found()
         self.user_method.remove_auth(user_id, auth_method, auth_string)
-        return {'ok': True}
+        return self.ok()
 
     def remove_nickname(self, user_id, nickname):
         if not self.user_checks.is_id_exist(user_id):
@@ -73,8 +78,26 @@ class ApiMethods:
         if not self.user_checks.is_nickname_exist(nickname):
             return self.errors.no_nickname_found()
         self.user_method.remove_nickname(user_id, nickname)
-        return {'ok': True}
+        return self.ok()
 
     def get_users_count(self):
         result = self.user_search.get_users_count()
-        return {'ok': True, 'result': result}
+        return self.ok(result)
+
+    def set_money(self, user_id, count):
+        if not self.user_checks.is_id_exist(user_id):
+            return self.errors.user_not_found()
+        self.user_method.set_money(user_id, count)
+        return self.ok()
+
+    def increase_money(self, user_id, count):
+        if not self.user_checks.is_id_exist(user_id):
+            return self.errors.user_not_found()
+        self.user_method.increase_money(user_id, count)
+        return self.ok()
+
+    def decrease_money(self, user_id, count):
+        if not self.user_checks.is_id_exist(user_id):
+            return self.errors.user_not_found()
+        self.user_method.decrease_money(user_id, count)
+        return self.ok()
