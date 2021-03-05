@@ -42,3 +42,4 @@ class UserMethods:
     def decrease_money(self, user_id, count):
         self.user_repo.update_user({"_id": user_id},
                                    {'money': -count}, '$inc')
+

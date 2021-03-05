@@ -52,6 +52,7 @@ class UserRepo:
             'nickname': 'None',
             'nicknames': [],
             'auth': self.base_auth_info,
+            'role': 'member',
             'connected_to': [],
             'money': 0
         }
