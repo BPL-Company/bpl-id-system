@@ -1,4 +1,4 @@
 from web.server import *
 from web.routes import *
 
-app.run(debug=True)
+app.run()
