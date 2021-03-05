@@ -1,5 +1,5 @@
 from flask import Flask, request
-app = Flask(__name__)
+app = Flask('app')
 
 from db.startup import *
 from web.check_token import require_token
