@@ -2,6 +2,10 @@
  
 Api сервер для идентификации юзеров BPL.
 
+## Auth token
+
+`/some_method?auth_token=<auth_token>`
+
 ## Методы
 
 `/get_user_by_id/<user_id>`
@@ -56,3 +60,24 @@ Returns Ok object.
 user_id - Integer.
 
 count - Integer.
+
+## Обьекты
+
+#User
+
+```json
+{"_id":1,
+  "auth":{"email":[],"minecraft":["Vezono3"],"phone_number":[],"telegram_id":[]},
+  "connected_to":[],
+  "money":0,
+  "nickname":"Vezono3",
+  "nicknames":[],
+  "role":"member"}
+```
+
+#Ok
+```json
+{"ok": true,
+"result": {}}
+```
+
