@@ -1,7 +1,7 @@
 from .users import UserRepo
 from .user_search import UserSearch
 from .user_methods import UserMethods
-from pymongo import MongoClient
+from flask_pymongo import MongoClient
 
 
 class Users:

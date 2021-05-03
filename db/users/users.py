@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from flask_pymongo import MongoClient
 
 
 class UserRepo:
@@ -28,8 +28,12 @@ class UserRepo:
             query = {}
         return self.users.find_one(query)
 
-    def create_user(self, auth_method, auth, nickname: str):
-        user = self.form_user_dict(auth_method, auth, nickname)
+    def create_user(self, auth_method, auth_string, nickname: str):
+        _id = list(self.users.find({}).sort('_id', -1).limit(1))
+        print(_id)
+        _id = _id[0]['_id']+1 if _id else 0
+        print(_id)
+        user = self.form_user_dict(auth_method, auth_string, nickname, _id)
         self.users.insert_one(user)
 
     def insert_user_document(self, user):
@@ -40,15 +44,17 @@ class UserRepo:
         base_doc.update(user)
         return base_doc
 
-    def form_user_dict(self, auth_method, auth, nickname: str):
+    def form_user_dict(self, auth_method, auth, nickname: str, _id=0):
         user = self.base_user_info
         user['nickname'] = nickname
         user['auth'][f'{auth_method}'].append(auth)
+        user['_id'] = _id
         return user
 
     @property
     def base_user_info(self):
         return {
+            '_id': 0,
             'nickname': 'None',
             'nicknames': [],
             'auth': self.base_auth_info,

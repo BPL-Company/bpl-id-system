@@ -1,4 +1,4 @@
 flask
-pymongo
+Flask-PyMongo
 gunicorn
 dnspython

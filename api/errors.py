@@ -2,6 +2,12 @@ class Errors:
     def form_error(self, reason, errcode):
         return {'ok': False, 'reason': reason, 'errcode': errcode}
 
+    def invalid_token(self):
+        return self.form_error('Invalid token', -2)
+
+    def missing_token(self):
+        return self.form_error('Missing token', -1)
+
     def missing_args(self):
         return self.form_error('Missing some args. Recheck your request.', 0)
 
@@ -19,3 +25,4 @@ class Errors:
 
     def no_nickname_found(self):
         return self.form_error('This nickname never used', 5)
+

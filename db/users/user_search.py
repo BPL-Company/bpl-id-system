@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from flask_pymongo import MongoClient
 from .users import UserRepo
 
 
@@ -18,8 +18,10 @@ class UserSearch:
 
     def get_user_by_nickname(self, nickname: str):
         users = self.users.find_users()
-        result = [user for user in users if user['nickname'] == nickname or nickname in user['nicknames']][0]
-        return result
+        result = [user for user in users if user['nickname'] == nickname or nickname in user['nicknames']]
+        if result:
+            return result[0]
+        return None
 
     def get_user_by_id(self, user_id):
         result = self.users.find_user({'_id': user_id})

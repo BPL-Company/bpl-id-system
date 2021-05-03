@@ -24,7 +24,7 @@ class ApiMethods:
         if self.user_checks.is_auth_exist(auth_method, auth_string):
             return self.errors.auth_used()
 
-        self.create_user(nickname=nickname, auth_method=auth_method, auth_string=auth_string)
+        self.user_repo.create_user(nickname=nickname, auth_method=auth_method, auth_string=auth_string)
         new_user = self.user_search.get_user_by_nickname(nickname)
         return self.ok(new_user)
 

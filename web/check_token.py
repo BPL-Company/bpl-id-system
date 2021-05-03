@@ -1,5 +1,7 @@
 from functools import wraps
 from config import auth_token
+from api.errors import Errors
+errors = Errors()
 
 
 def require_token(func):
@@ -10,10 +12,10 @@ def require_token(func):
         token = request.args.get('auth_token')
 
         if not token:
-            return {'ok': False, 'reason': 'Token required.', 'errcode': -1}
+            return errors.missing_token()
 
         if token != auth_token:
-            return {'ok': False, 'reason': 'Token invalid.', 'errcode': -2}
+            return errors.invalid_token()
 
         return func(*args, **kwargs)
     return check_token
