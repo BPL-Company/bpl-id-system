@@ -8,7 +8,7 @@ def get_auth_token():
 
 @app.route('/get_user_by_id/<user_id>')
 def get_user_by_id(user_id):
-    return api.get_user_by_id(user_id)
+    return api.get_user_by_id(int(user_id))
 
 
 @app.route('/get_user_by_nickname/<nickname>')

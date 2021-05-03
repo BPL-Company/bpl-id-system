@@ -21,6 +21,12 @@ Returns User object in Ok.result
 
 nickname - String.
 
+`/create_minecraft_user?nickname=<nickname>`
+
+Returns User object in Ok.result
+
+nickname - String.
+
 
 `/create_user?nickname=<nickname>&auth_method=<auth_method>&auth_string=<auth_string>`
 
@@ -67,10 +73,10 @@ count - Integer.
 
 ```json
 {"_id":1,
-  "auth":{"email":[],"minecraft":["Vezono3"],"phone_number":[],"telegram_id":[]},
+  "auth":{"email":["vezono@bpl.org"],"minecraft":["minecraft"],"phone_number":["+79631376940"],"telegram_id":["512006137"]},
   "connected_to":[],
   "money":0,
-  "nickname":"Vezono3",
+  "nickname":"Vezono2",
   "nicknames":[],
   "role":"member"}
 ```
