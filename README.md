@@ -33,6 +33,7 @@ nickname - String.
 Returns User object in Ok.result
 
 nickname - String.
+
 tg_id - Integer.
 
 
