@@ -30,9 +30,7 @@ class UserRepo:
 
     def create_user(self, auth_method, auth_string, nickname: str):
         _id = list(self.users.find({}).sort('_id', -1).limit(1))
-        print(_id)
         _id = _id[0]['_id']+1 if _id else 0
-        print(_id)
         user = self.form_user_dict(auth_method, auth_string, nickname, _id)
         self.users.insert_one(user)
 

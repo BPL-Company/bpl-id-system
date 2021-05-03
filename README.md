@@ -10,21 +10,21 @@ Api сервер для идентификации юзеров BPL.
 
 `/get_user_by_id/<user_id>`
 
-Returns User object.
+Returns User object in Ok.result
 
 user_id - Integer.
 
 
 `/get_user_by_nickname/<nickname>`
 
-Returns User object.
+Returns User object in Ok.result
 
 nickname - String.
 
 
 `/create_user?nickname=<nickname>&auth_method=<auth_method>&auth_string=<auth_string>`
 
-Returns User object.
+Returns User object in Ok.result
 
 nickname - String.
 

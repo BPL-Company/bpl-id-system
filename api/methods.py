@@ -16,7 +16,7 @@ class ApiMethods:
     def ok(self, result=None):
         answer = {'ok': True}
         answer.update({'result': result}) if result else None
-        return result
+        return answer
 
     def create_user(self, nickname, auth_method, auth_string):
         if self.user_checks.is_nickname_exist(nickname):
