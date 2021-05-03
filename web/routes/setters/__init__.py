@@ -1,6 +1,16 @@
 from web.server import *
 
 
+@app.route('/create_tg_user')
+@require_token
+def create_minecraft_user():
+    nickname = request.args['nickname']
+    tg_id = request.args['tg_id']
+    if not nickname or not tg_id:
+        return api.errors.missing_args()
+    return api.create_tg_user(nickname, tg_id)
+
+
 @app.route('/create_minecraft_user')
 @require_token
 def create_minecraft_user():

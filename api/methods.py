@@ -18,6 +18,16 @@ class ApiMethods:
         answer.update({'result': result}) if result else None
         return answer
 
+    def create_tg_user(self, nickname, tg_id):
+        if self.user_checks.is_nickname_exist(nickname):
+            return self.errors.nickname_used()
+        if self.user_checks.is_auth_exist('telegram_id', tg_id):
+            return self.errors.auth_used()
+
+        self.user_repo.create_user(nickname=nickname, auth_method='telegram_id', auth_string=tg_id)
+        new_user = self.user_search.get_user_by_nickname(nickname)
+        return self.ok(new_user)
+
     def create_minecraft_user(self, nickname):
         if self.user_checks.is_nickname_exist(nickname):
             return self.errors.nickname_used()
