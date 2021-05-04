@@ -3,7 +3,7 @@ from web.server import *
 
 @app.route('/create_tg_user')
 @require_token
-def create_minecraft_user():
+def create_tg_user():
     nickname = request.args['nickname']
     tg_id = request.args['tg_id']
     if not nickname or not tg_id:
