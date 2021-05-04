@@ -21,6 +21,13 @@ Returns User object in Ok.result
 
 nickname - String.
 
+`/get_user_by_tg_id/<tg_id>`
+
+Returns User object in Ok.result
+
+tg_id - Integer.
+
+
 `/create_minecraft_user?nickname=<nickname>`
 
 Returns User object in Ok.result

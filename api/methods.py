@@ -58,6 +58,12 @@ class ApiMethods:
         new_user = self.user_search.get_user_by_nickname(nickname)
         return self.ok(new_user)
 
+    def get_user_by_tg_id(self, tg_id):
+        user = self.user_search.get_user_by_tg_id(tg_id)
+        if not user:
+            return self.errors.user_not_found()
+        return self.ok(user)
+
     def get_user_by_id(self, user_id):
         user = self.user_search.get_user_by_id(user_id)
         if not user:
