@@ -28,11 +28,25 @@ class UserRepo:
             query = {}
         return self.users.find_one(query)
 
+    def merge_users(self, first_id, second_id):
+        first_user = self.find_user({'_id': first_id})
+        second_user = self.find_user({'_id': second_id})
+
+        for field in ['money', 'nicknames', 'connected_to']:
+            first_user[field] += second_user[field]
+        for field in self.base_auth_info:
+            first_user['auth'][field] += second_user['auth'][field]
+        self.update_user({'_id': first_id}, first_user)
+        self.delete_user(second_id)
+
     def create_user(self, auth_method, auth_string, nickname: str):
         _id = list(self.users.find({}).sort('_id', -1).limit(1))
         _id = _id[0]['_id']+1 if _id else 0
         user = self.form_user_dict(auth_method, auth_string, nickname, _id)
         self.users.insert_one(user)
+
+    def delete_user(self, user_id):
+        self.users.delete_one({'_id': user_id})
 
     def insert_user_document(self, user):
         self.users.insert_one(user)

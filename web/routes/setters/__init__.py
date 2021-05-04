@@ -1,6 +1,16 @@
 from web.server import *
 
 
+@app.route('/merge_users')
+@require_token
+def merge_users():
+    first_id = request.args['first_id']
+    second_id = request.args['second_id']
+    if not first_id or not second_id:
+        return api.errors.missing_args()
+    return api.merge_users(first_id, second_id)
+
+
 @app.route('/create_tg_user')
 @require_token
 def create_tg_user():

@@ -18,6 +18,16 @@ class ApiMethods:
         answer.update({'result': result}) if result else None
         return answer
 
+    def merge_users(self, first_id, second_id):
+        if self.user_checks.is_id_exist(first_id):
+            return self.errors.user_not_found()
+        if self.user_checks.is_id_exist(second_id):
+            return self.errors.user_not_found()
+
+        self.user_repo.merge_users(first_id=first_id, second_id=second_id)
+        new_user = self.user_search.get_user_by_id(first_id)
+        return self.ok(new_user)
+
     def create_tg_user(self, nickname, tg_id):
         if self.user_checks.is_nickname_exist(nickname):
             return self.errors.nickname_used()

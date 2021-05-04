@@ -27,6 +27,13 @@ Returns User object in Ok.result
 
 nickname - String.
 
+`/create_minecraft_user?first_id=<first_id>&second_id=<second_id>`
+
+Returns merged User object in Ok.result 
+
+first_id - Integer.
+
+second_id - Integer.
 
 `/create_minecraft_user?nickname=<nickname>&tg_id`
 
