@@ -79,7 +79,7 @@ def remove_auth():
     auth_string = request.args['auth_string']
     if not auth_string or not auth_method or not user_id:
         return api.errors.missing_args()
-    return api.remove_autb(user_id, auth_method, auth_string)
+    return api.remove_auth(user_id, auth_method, auth_string)
 
 
 @app.route('/update_nickname')
