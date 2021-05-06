@@ -8,6 +8,14 @@ Api сервер для идентификации юзеров BPL.
 
 ## Методы
 
+
+`/delete_user?user_id=<user_id>`
+
+Returns User object in Ok.result
+
+user_id - Integer.
+
+
 `/get_user_by_id/<user_id>`
 
 Returns User object in Ok.result
