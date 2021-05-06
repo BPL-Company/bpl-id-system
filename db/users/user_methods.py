@@ -25,14 +25,14 @@ class UserMethods:
 
     def remove_auth(self, user_id, auth_method, auth_string):
         self.user_repo.update_user({"_id": user_id},
-                                   {f'auth.{auth_method}': auth_string}, '$pop')
+                                   {f'auth.{auth_method}': auth_string}, '$pull')
 
     def remove_connection(self, user_id, connection):
         self.user_repo.update_user({"_id": user_id},
-                                   {'connected_to': connection}, '$pop')
+                                   {'connected_to': connection}, '$pull')
 
     def remove_nickname(self, user_id, nickname):
-        self.user_repo.update_user({"_id": user_id}, {'nicknames': nickname}, '$pop')
+        self.user_repo.update_user({"_id": user_id}, {'nicknames': nickname}, '$pull')
 
     def set_money(self, user_id, count):
         self.user_repo.update_user({"_id": user_id},
