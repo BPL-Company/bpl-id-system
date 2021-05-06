@@ -62,6 +62,26 @@ def add_auth():
     return api.add_auth(user_id, auth_method, auth_string)
 
 
+@app.route('/delete_user')
+@require_token
+def delete_user():
+    user_id = int(request.args['user_id'])
+    if not user_id:
+        return api.errors.missing_args()
+    return api.delete_user(user_id)
+
+
+@app.route('/remove_auth')
+@require_token
+def remove_auth():
+    user_id = int(request.args['user_id'])
+    auth_method = request.args['auth_method']
+    auth_string = request.args['auth_string']
+    if not auth_string or not auth_method or not user_id:
+        return api.errors.missing_args()
+    return api.add_auth(user_id, auth_method, auth_string)
+
+
 @app.route('/update_nickname')
 @require_token
 def update_nickname():

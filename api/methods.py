@@ -70,11 +70,27 @@ class ApiMethods:
             return self.errors.user_not_found()
         return self.ok(user)
 
+    def delete_user(self, user_id):
+        user = self.user_search.get_user_by_id(user_id)
+        if not user:
+            return self.errors.user_not_found()
+        self.user_method.delete_user(user_id)
+        return self.ok(user)
+
     def get_user_by_nickname(self, nickname):
         user = self.user_search.get_user_by_nickname(nickname)
         if not user:
             return self.errors.user_not_found()
         return self.ok(user)
+
+    def remove_auth(self, user_id, auth_method, auth_string):
+        if not self.user_checks.is_id_exist(user_id):
+            return self.errors.user_not_found()
+        if not self.user_checks.is_auth_exist(auth_method, auth_string):
+            return self.errors.no_auth_found()
+
+        self.user_method.remove_auth(user_id, auth_method, auth_string)
+        return self.ok()
 
     def add_auth(self, user_id, auth_method, auth_string):
         if not self.user_checks.is_id_exist(user_id):

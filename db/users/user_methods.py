@@ -7,6 +7,9 @@ class UserMethods:
         self.user_search = UserSearch(db)
         self.user_repo = self.user_search.users
 
+    def delete_user(self, user_id):
+        self.user_repo.delete_user(user_id)
+
     def update_nickname(self, user_id, nickname):
         user = self.user_search.get_user_by_id(user_id)
         self.user_repo.update_user(user, {'nickname': nickname})
