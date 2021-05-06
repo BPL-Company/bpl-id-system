@@ -54,7 +54,7 @@ def add_connection():
 @app.route('/add_auth')
 @require_token
 def add_auth():
-    user_id = request.args['user_id']
+    user_id = int(request.args['user_id'])
     auth_method = request.args['auth_method']
     auth_string = request.args['auth_string']
     if not auth_string or not auth_method or not user_id:
@@ -66,7 +66,7 @@ def add_auth():
 @require_token
 def update_nickname():
     nickname = request.args['nickname']
-    user_id = request.args['user_id']
+    user_id = int(request.args['user_id'])
     if not nickname or not user_id:
         return api.errors.missing_args()
     return api.update_nickname(user_id, nickname)
@@ -76,7 +76,7 @@ def update_nickname():
 @require_token
 def remove_nickname():
     nickname = request.args['nickname']
-    user_id = request.args['user_id']
+    user_id = int(request.args['user_id'])
     if not nickname or not user_id:
         return api.errors.missing_args()
     return api.remove_nickname(user_id, nickname)
@@ -85,8 +85,8 @@ def remove_nickname():
 @app.route('/set_money')
 @require_token
 def set_money():
-    user_id = request.args['user_id']
-    count = request.args['count']
+    user_id = int(request.args['user_id'])
+    count = int(request.args['count'])
     if not count or not user_id:
         return api.errors.missing_args()
     return api.set_money(user_id, count)
@@ -95,8 +95,8 @@ def set_money():
 @app.route('/inc_money')
 @require_token
 def inc_money():
-    user_id = request.args['user_id']
-    count = request.args['count']
+    user_id = int(request.args['user_id'])
+    count = int(request.args['count'])
     if not count or not user_id:
         return api.errors.missing_args()
     return api.increase_money(user_id, count)
@@ -105,8 +105,8 @@ def inc_money():
 @app.route('/dec_money')
 @require_token
 def dec_money():
-    user_id = request.args['user_id']
-    count = request.args['count']
+    user_id = int(request.args['user_id'])
+    count = int(request.args['count'])
     if not count or not user_id:
         return api.errors.missing_args()
     return api.decrease_money(user_id, count)
