@@ -23,6 +23,13 @@ class UserSearch:
             return result[0]
         return None
 
+    def get_user_by_minecraft(self, minecraft):
+        users = self.users.find_users()
+        result = [user for user in users if minecraft in user['auth']['minecraft']]
+        if result:
+            return result[0]
+        return None
+
     def get_user_by_tg_id(self, tg_id):
         users = self.users.find_users()
         result = [user for user in users if tg_id in user['auth']['telegram_id']]
