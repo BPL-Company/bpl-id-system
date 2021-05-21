@@ -17,7 +17,7 @@ def get_user_by_nickname(nickname):
 
 
 @app.route('/get_user_by_minecraft/<nickname>')
-def get_user_by_nickname(nickname):
+def get_user_by_minecraft(nickname):
     return api.get_user_by_minecraft(nickname)
 
 
