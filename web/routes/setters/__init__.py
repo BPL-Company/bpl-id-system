@@ -1,4 +1,5 @@
 from web.server import *
+from decimal import Decimal
 
 
 @app.route('/merge_users')
@@ -106,7 +107,7 @@ def remove_nickname():
 @require_token
 def set_money():
     user_id = int(request.args['user_id'])
-    count = int(request.args['count'])
+    count = Decimal(request.args['count'])
     if not count or not user_id:
         return api.errors.missing_args()
     return api.set_money(user_id, count)
@@ -116,7 +117,7 @@ def set_money():
 @require_token
 def inc_money():
     user_id = int(request.args['user_id'])
-    count = int(request.args['count'])
+    count = Decimal(request.args['count'])
     if not count or not user_id:
         return api.errors.missing_args()
     return api.increase_money(user_id, count)
@@ -126,7 +127,7 @@ def inc_money():
 @require_token
 def dec_money():
     user_id = int(request.args['user_id'])
-    count = int(request.args['count'])
+    count = Decimal(request.args['count'])
     if not count or not user_id:
         return api.errors.missing_args()
     return api.decrease_money(user_id, count)
