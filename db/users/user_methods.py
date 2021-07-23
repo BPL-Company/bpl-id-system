@@ -11,9 +11,7 @@ class UserMethods:
         self.user_repo.delete_user(user_id)
 
     def update_nickname(self, user_id, nickname):
-        user = self.user_search.get_user_by_id(user_id)
-        self.user_repo.update_user(user, {'nickname': nickname})
-        self.user_repo.update_user(user, {'nicknames': nickname}, '$addToSet')
+        self.user_repo.update_user({'_id': user_id}, {'nickname': nickname})
 
     def add_auth(self, user_id, auth_method, auth_string):
         self.user_repo.update_user({"_id": user_id},

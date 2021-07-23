@@ -17,10 +17,9 @@ class UserSearch:
         return result
 
     def get_user_by_nickname(self, nickname: str):
-        users = self.users.find_users()
-        result = [user for user in users if user['nickname'] == nickname or nickname in user['nicknames']]
-        if result:
-            return result[0]
+        user = self.users.find_user({'nickname': nickname})
+        if user:
+            return user
         return None
 
     def get_user_by_minecraft(self, minecraft):

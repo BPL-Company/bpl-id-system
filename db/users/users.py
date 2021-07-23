@@ -32,7 +32,7 @@ class UserRepo:
         first_user = self.find_user({'_id': first_id})
         second_user = self.find_user({'_id': second_id})
 
-        for field in ['money', 'nicknames', 'connected_to']:
+        for field in ['money']:
             first_user[field] += second_user[field]
         for field in self.base_auth_info:
             first_user['auth'][field] += second_user['auth'][field]
@@ -68,10 +68,8 @@ class UserRepo:
         return {
             '_id': 0,
             'nickname': 'None',
-            'nicknames': [],
             'auth': self.base_auth_info,
             'role': 'member',
-            'connected_to': [],
             'money': 0
         }
 
