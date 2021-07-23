@@ -25,7 +25,7 @@ class UserRepo:
                 self.minecraft.insert({'_id': user['_id'], 'minecraft': user['auth']['minecraft']})
             except:
                 pass
-            self.phone.insert({'_id': user['_id'], 'phone': user['auth']['phone']})
+            self.phone.insert({'_id': user['_id'], 'phone': user['auth']['phone_number']})
             self.telegram.insert({'_id': user['_id'], 'telegram': user['auth']['telegram']})
             self.email.insert({'_id': user['_id'], 'email': user['auth']['email']})
 
