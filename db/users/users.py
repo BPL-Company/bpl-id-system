@@ -5,6 +5,10 @@ class UserRepo:
     def __init__(self, db: MongoClient):
         self.db = db
         self.users = db.bpl.users
+        self.email = db.bpl.email
+        self.minecraft = db.bpl.minecraft
+        self.phone = db.bpl.phone
+        self.telegram = db.bpl.telegram
         self.sync_data()
 
     def update_user(self, query, data, method="$set"):
@@ -19,7 +23,11 @@ class UserRepo:
             self.update_user(user, synced_user)
             for state in user:
                 if state not in self.base_auth_info:
-                    self.update_user({'_id': user['_id']}, {'$unset': {state: None}})
+                    self.update_user({'_id': user['_id']}, {'$unset': state})
+            self.minecraft.insert({'_id': user['id'], 'minecraft': user['minecraft']})
+            self.phone.insert({'_id': user['id'], 'minecraft': user['phone']})
+            self.telegram.insert({'_id': user['id'], 'minecraft': user['telegram']})
+            self.email.insert({'_id': user['id'], 'minecraft': user['email']})
 
     def find_users(self, query=None):
         if query is None:
