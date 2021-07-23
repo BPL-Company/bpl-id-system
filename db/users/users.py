@@ -21,9 +21,8 @@ class UserRepo:
             synced_user.update(user)
             # synced_user['nicknames'] = list(set(synced_user['nicknames']))
             self.update_user(user, synced_user)
-            for state in user:
-                if state not in self.base_auth_info:
-                    self.update_user({'_id': user['_id']}, {state: 1}, '$unset')
+            self.update_user({'_id': user['_id']}, {'nicknames': 1}, '$unset')
+            self.update_user({'_id': user['_id']}, {'connected_to': 1}, '$unset')
             self.minecraft.insert({'_id': user['id'], 'minecraft': user['minecraft']})
             self.phone.insert({'_id': user['id'], 'minecraft': user['phone']})
             self.telegram.insert({'_id': user['id'], 'minecraft': user['telegram']})
