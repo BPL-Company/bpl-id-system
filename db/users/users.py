@@ -23,10 +23,10 @@ class UserRepo:
             self.update_user(user, synced_user)
             self.update_user({'_id': user['_id']}, {'nicknames': 1}, '$unset')
             self.update_user({'_id': user['_id']}, {'connected_to': 1}, '$unset')
-            self.minecraft.insert({'_id': user['_id'], 'minecraft': user['minecraft']})
-            self.phone.insert({'_id': user['_id'], 'minecraft': user['phone']})
-            self.telegram.insert({'_id': user['_id'], 'minecraft': user['telegram']})
-            self.email.insert({'_id': user['_id'], 'minecraft': user['email']})
+            self.minecraft.insert({'_id': user['_id'], 'minecraft': user['auth']['minecraft']})
+            self.phone.insert({'_id': user['_id'], 'minecraft': user['auth']['phone']})
+            self.telegram.insert({'_id': user['_id'], 'minecraft': user['auth']['telegram']})
+            self.email.insert({'_id': user['_id'], 'minecraft': user['auth']['email']})
 
     def find_users(self, query=None):
         if query is None:
