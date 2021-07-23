@@ -17,6 +17,9 @@ class UserRepo:
             synced_user.update(user)
             # synced_user['nicknames'] = list(set(synced_user['nicknames']))
             self.update_user(user, synced_user)
+            for state in user:
+                if state not in self.base_auth_info:
+                    self.update_user({'_id': user['_id'}, {'$unset': {state: None}})
 
     def find_users(self, query=None):
         if query is None:
