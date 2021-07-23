@@ -25,9 +25,9 @@ class UserRepo:
                 self.minecraft.insert({'_id': user['_id'], 'minecraft': user['auth']['minecraft']})
             except:
                 pass
-            self.phone.insert({'_id': user['_id'], 'minecraft': user['auth']['phone']})
-            self.telegram.insert({'_id': user['_id'], 'minecraft': user['auth']['telegram']})
-            self.email.insert({'_id': user['_id'], 'minecraft': user['auth']['email']})
+            self.phone.insert({'_id': user['_id'], 'phone': user['auth']['phone']})
+            self.telegram.insert({'_id': user['_id'], 'telegram': user['auth']['telegram']})
+            self.email.insert({'_id': user['_id'], 'email': user['auth']['email']})
 
     def find_users(self, query=None):
         if query is None:
