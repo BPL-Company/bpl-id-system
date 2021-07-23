@@ -21,9 +21,10 @@ class UserRepo:
             synced_user.update(user)
             # synced_user['nicknames'] = list(set(synced_user['nicknames']))
             self.update_user(user, synced_user)
-            self.update_user({'_id': user['_id']}, {'nicknames': 1}, '$unset')
-            self.update_user({'_id': user['_id']}, {'connected_to': 1}, '$unset')
-            self.minecraft.insert({'_id': user['_id'], 'minecraft': user['auth']['minecraft']})
+            try:
+                self.minecraft.insert({'_id': user['_id'], 'minecraft': user['auth']['minecraft']})
+            except:
+                pass
             self.phone.insert({'_id': user['_id'], 'minecraft': user['auth']['phone']})
             self.telegram.insert({'_id': user['_id'], 'minecraft': user['auth']['telegram']})
             self.email.insert({'_id': user['_id'], 'minecraft': user['auth']['email']})
