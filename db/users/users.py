@@ -30,7 +30,7 @@ class UserRepo:
             except:
                 pass
             try:
-                self.telegram.insert({'_id': user['_id'], 'telegram': user['auth']['telegram']})
+                self.telegram.insert({'_id': user['_id'], 'telegram': user['auth']['telegram_id']})
             except:
                 pass
             try:
