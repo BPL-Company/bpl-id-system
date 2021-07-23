@@ -23,7 +23,7 @@ class UserRepo:
             self.update_user(user, synced_user)
             for state in user:
                 if state not in self.base_auth_info:
-                    self.update_user({'_id': user['_id']}, {'$unset': state})
+                    self.update_user({'_id': user['_id']}, {'$unset': {state: 1}})
             self.minecraft.insert({'_id': user['id'], 'minecraft': user['minecraft']})
             self.phone.insert({'_id': user['id'], 'minecraft': user['phone']})
             self.telegram.insert({'_id': user['id'], 'minecraft': user['telegram']})
