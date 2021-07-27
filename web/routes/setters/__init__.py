@@ -5,6 +5,7 @@ from decimal import Decimal
 @app.route('/merge_users')
 @require_token
 def merge_users():
+    return api.errors.missing_args()
     first_id = request.args['first_id']
     second_id = request.args['second_id']
     if not first_id or not second_id:

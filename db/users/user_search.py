@@ -5,50 +5,31 @@ from .users import UserRepo
 class UserSearch:
     def __init__(self, db: MongoClient):
         self.users = UserRepo(db)
+        self.db = self.users.bpl
 
     def get_users_by_auth_method(self, auth_method: str):
-        users = self.users.find_users()
-        result = [user for user in users if user['auth'][f'{auth_method}']]
-        return result
+        return self.db[auth_method].find_users()
 
-    def get_users_by_auth(self, auth_method: str, auth_string: str):
-        users = self.users.find_users()
-        result = [user for user in users if auth_string in user['auth'][f'{auth_method}']]
-        return result
+    def get_user_by_auth(self, auth_method: str, auth_string: str):
+        return self.db[auth_method].find_one({auth_method: auth_string})
 
     def get_user_by_nickname(self, nickname: str):
-        user = self.users.find_user({'nickname': nickname})
-        if user:
-            return user
-        return None
+        return self.users.find_user({'nickname': nickname})
 
     def get_user_by_minecraft(self, minecraft):
-        users = self.users.find_users()
-        result = [user for user in users if minecraft in user['auth']['minecraft']]
-        if result:
-            return result[0]
-        return None
+        return self.db['minecraft'].find_one({'minecraft': minecraft})
 
     def get_user_by_tg_id(self, tg_id):
-        users = self.users.find_users()
-        result = [user for user in users if tg_id in user['auth']['telegram_id']]
-        if result:
-            return result[0]
-        return None
-        # result = self.users.find_user({'auth.tele': user_id})
-        # return result
+        return self.db['telegram'].find_one({'telegram': tg_id})
 
     def get_user_by_id(self, user_id):
-        result = self.users.find_user({'_id': user_id})
-        return result
+        return self.users.find_user({'_id': user_id})
 
     def get_user_by_query(self, query):
-        result = self.users.find_user(query)
-        return result
+        return self.users.find_user(query)
 
     def get_users_by_query(self, query):
-        result = self.users.find_user(query)
-        return result
+        return self.users.find_user(query)
 
     def get_users_count(self):
         return len(self.users.find_users())

@@ -4,6 +4,7 @@ from flask_pymongo import MongoClient
 class UserRepo:
     def __init__(self, db: MongoClient):
         self.db = db
+        self.bpl = db.bpl
         self.users = db.bpl.users
         self.email = db.bpl.email
         self.minecraft = db.bpl.minecraft

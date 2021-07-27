@@ -6,6 +6,11 @@ def get_auth_token():
     return {'result': 'KOZA.'}
 
 
+@app.route('/get_users_count')
+def get_users_count():
+    return api.get_users_count()
+
+
 @app.route('/get_user_by_id/<user_id>')
 def get_user_by_id(user_id):
     return api.get_user_by_id(int(user_id))

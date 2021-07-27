@@ -14,4 +14,4 @@ class UserChecks:
         return bool(self.user_search.get_user_by_nickname(nickname))
 
     def is_auth_exist(self, auth_method, auth_string):
-        return bool(self.user_search.get_users_by_auth(auth_method, auth_string))
+        return bool(self.user_search.get_user_by_auth(auth_method, auth_string))
