@@ -61,7 +61,7 @@ class ApiMethods:
     def get_user_by_minecraft(self, minecraft):
         user = self.user_search.get_user_by_minecraft(minecraft)
         if not user:
-            return self.errors.user_not_found()
+            return self.create_minecraft_user(minecraft)
         return self.ok(user)
 
     def get_user_by_tg_id(self, tg_id):
