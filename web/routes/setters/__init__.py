@@ -105,7 +105,7 @@ def remove_nickname():
 
 
 @app.route('/set_money')
-@require_token
+@require_
 def set_money():
     user_id = request.args.get('user_id')
     minecraft = request.args.get('minecraft')
@@ -138,7 +138,10 @@ def inc_money():
         user = api.get_user_by_minecraft(minecraft)['result']
         user_id = user['_id']
 
-    count = Decimal(request.args['count'])
+    if count <= 0:
+        return api.errors.invalid_money_count()
+
+    count = Decimal(count)
     return api.increase_money(user_id, count)
 
 
@@ -156,6 +159,9 @@ def dec_money():
     if not user_id:
         user = api.get_user_by_minecraft(minecraft)['result']
         user_id = user['_id']
+
+    if count <= 0:
+        return api.errors.invalid_money_count()
 
     count = Decimal(request.args['count'])
     return api.decrease_money(user_id, count)
