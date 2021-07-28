@@ -105,7 +105,7 @@ def remove_nickname():
 
 
 @app.route('/set_money')
-@require_
+@require_token
 def set_money():
     user_id = request.args.get('user_id')
     minecraft = request.args.get('minecraft')
