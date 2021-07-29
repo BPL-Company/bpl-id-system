@@ -17,7 +17,10 @@ class UserSearch:
         return self.users.find_user({'nickname': nickname})
 
     def get_user_by_minecraft(self, minecraft):
-        return self.db['minecraft'].find_one({'minecraft': minecraft})
+        user = self.get_user_by_auth('minecraft', minecraft)
+        if not user:
+            user = self.users.create_user('minecraft', minecraft, minecraft)
+        return user
 
     def get_user_by_tg_id(self, tg_id):
         return self.db['telegram'].find_one({'telegram': tg_id})

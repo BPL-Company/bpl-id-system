@@ -44,7 +44,7 @@ class ApiMethods:
         if self.user_checks.is_auth_exist('minecraft', 'nickname'):
             return self.errors.auth_used()
 
-        self.user_repo.create_user(nickname=nickname, auth_method='minecraft', auth_string='nickname')
+        self.user_repo.create_user(nickname=nickname, auth_method='minecraft', auth_string=nickname)
         new_user = self.user_search.get_user_by_nickname(nickname)
         return self.ok(new_user)
 

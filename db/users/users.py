@@ -64,8 +64,10 @@ class UserRepo:
     def create_user(self, auth_method, auth_string, nickname: str):
         _id = list(self.users.find({}).sort('_id', -1).limit(1))
         _id = _id[0]['_id']+1 if _id else 0
-        user = self.form_user_dict(auth_method, auth_string, nickname, _id)
+        user = self.form_user_dict(nickname, _id)
         self.users.insert_one(user)
+
+        self.bpl[auth_method].insert({'_id': _id, auth_method: auth_string})
 
     def delete_user(self, user_id):
         self.users.delete_one({'_id': user_id})
@@ -78,10 +80,9 @@ class UserRepo:
         base_doc.update(user)
         return base_doc
 
-    def form_user_dict(self, auth_method, auth, nickname: str, _id=0):
+    def form_user_dict(self, nickname: str, _id=0):
         user = self.base_user_info
         user['nickname'] = nickname
-        user['auth'][f'{auth_method}'].append(auth)
         user['_id'] = _id
         return user
 
