@@ -1,5 +1,5 @@
 from web.server import *
-from decimal import Decimal
+from bson import Decimal128
 
 
 @app.route('/merge_users')
@@ -115,11 +115,15 @@ def set_money():
     if not count:
         return api.errors.missing_args()
 
+    count = int(count)
+
+    if count <= 0:
+        return api.errors.invalid_money_count()
+
     if not user_id:
         user = api.get_user_by_minecraft(minecraft)['result']
         user_id = user['_id']
 
-    count = Decimal(request.args['count'])
     return api.set_money(user_id, count)
 
 
@@ -134,14 +138,15 @@ def inc_money():
     if not count:
         return api.errors.missing_args()
 
-    if not user_id:
-        user = api.get_user_by_minecraft(minecraft)['result']
-        user_id = user['_id']
+    count = int(count)
 
     if count <= 0:
         return api.errors.invalid_money_count()
 
-    count = Decimal(count)
+    if not user_id:
+        user = api.get_user_by_minecraft(minecraft)['result']
+        user_id = user['_id']
+
     return api.increase_money(user_id, count)
 
 
@@ -156,12 +161,13 @@ def dec_money():
     if not count:
         return api.errors.missing_args()
 
-    if not user_id:
-        user = api.get_user_by_minecraft(minecraft)['result']
-        user_id = user['_id']
+    count = int(count)
 
     if count <= 0:
         return api.errors.invalid_money_count()
 
-    count = Decimal(request.args['count'])
+    if not user_id:
+        user = api.get_user_by_minecraft(minecraft)['result']
+        user_id = user['_id']
+
     return api.decrease_money(user_id, count)

@@ -19,11 +19,15 @@ class UserSearch:
     def get_user_by_minecraft(self, minecraft):
         user = self.get_user_by_auth('minecraft', minecraft)
         if not user:
-            user = self.users.create_user('minecraft', minecraft, minecraft)
+            self.users.create_user('minecraft', minecraft, minecraft)
+        user = self.get_user_by_auth('minecraft', minecraft)
+        user.update(self.get_user_by_id(user['_id']))
         return user
 
     def get_user_by_tg_id(self, tg_id):
-        return self.db['telegram'].find_one({'telegram': tg_id})
+        user = self.db['telegram'].find_one({'telegram': tg_id})
+        user.update(self.get_user_by_id(user['_id']))
+        return user
 
     def get_user_by_id(self, user_id):
         return self.users.find_user({'_id': user_id})

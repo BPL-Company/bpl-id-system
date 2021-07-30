@@ -10,7 +10,7 @@ class UserRepo:
         self.minecraft = db.bpl.minecraft
         self.phone = db.bpl.phone
         self.telegram = db.bpl.telegram
-        self.sync_data()
+        #self.sync_data()
 
     def update_user(self, query, data, method="$set"):
         self.users.update_one(query, {method: data})
