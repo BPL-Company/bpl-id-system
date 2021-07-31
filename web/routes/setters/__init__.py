@@ -115,7 +115,7 @@ def set_money():
     count = int(count)
     telegram = int(telegram)
 
-    user = api.get_user_by_minecraft(telegram)['result']
+    user = api.get_user_by_tg_id(telegram)['result']
     user_id = user['_id']
 
     return api.set_money(user_id, count)
@@ -135,7 +135,7 @@ def set_money():
     if count <= 0:
         return api.errors.invalid_money_count()
 
-    user = api.get_user_by_minecraft(telegram)['result']
+    user = api.get_user_by_tg_id(telegram)['result']
     user_id = user['_id']
 
     return api.inc_money(user_id, count)
@@ -155,7 +155,7 @@ def set_money():
     if count <= 0:
         return api.errors.invalid_money_count()
 
-    user = api.get_user_by_minecraft(telegram)['result']
+    user = api.get_user_by_tg_id(telegram)['result']
     user_id = user['_id']
 
     return api.dec_money(user_id, count)
