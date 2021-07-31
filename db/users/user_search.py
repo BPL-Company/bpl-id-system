@@ -25,7 +25,10 @@ class UserSearch:
         return user
 
     def get_user_by_tg_id(self, tg_id):
-        user = self.db['telegram'].find_one({'telegram': tg_id})
+        user = self.get_user_by_auth('telegram', tg_id)
+        if not user:
+            self.users.create_user('telegram', tg_id, f'TG-{tg_id}')
+        user = self.get_user_by_auth('telegram', tg_id)
         user.update(self.get_user_by_id(user['_id']))
         return user
 

@@ -104,6 +104,63 @@ def remove_nickname():
     return api.remove_nickname(user_id, nickname)
 
 
+@app.route('/set_money_tg')
+@require_token
+def set_money():
+    telegram = request.args.get('telegram')
+    count = request.args.get('count')
+    if not telegram or not count:
+        return api.errors.missing_args()
+
+    count = int(count)
+    telegram = int(telegram)
+
+    user = api.get_user_by_minecraft(telegram)['result']
+    user_id = user['_id']
+
+    return api.set_money(user_id, count)
+
+
+@app.route('/inc_money_tg')
+@require_token
+def set_money():
+    telegram = request.args.get('telegram')
+    count = request.args.get('count')
+    if not telegram or not count:
+        return api.errors.missing_args()
+
+    count = int(count)
+    telegram = int(telegram)
+
+    if count <= 0:
+        return api.errors.invalid_money_count()
+
+    user = api.get_user_by_minecraft(telegram)['result']
+    user_id = user['_id']
+
+    return api.inc_money(user_id, count)
+
+
+@app.route('/dec_money_tg')
+@require_token
+def set_money():
+    telegram = request.args.get('telegram')
+    count = request.args.get('count')
+    if not telegram or not count:
+        return api.errors.missing_args()
+
+    count = int(count)
+    telegram = int(telegram)
+
+    if count <= 0:
+        return api.errors.invalid_money_count()
+
+    user = api.get_user_by_minecraft(telegram)['result']
+    user_id = user['_id']
+
+    return api.dec_money(user_id, count)
+
+
 @app.route('/set_money')
 @require_token
 def set_money():
