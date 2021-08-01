@@ -166,8 +166,9 @@ def set_money():
 def set_money():
     user_id = request.args.get('user_id')
     minecraft = request.args.get('minecraft')
+    telegram = request.args.get('telegram')
     count = request.args.get('count')
-    if not user_id and not minecraft:
+    if not user_id and not minecraft and not telegram:
         return api.errors.missing_args()
     if not count:
         return api.errors.missing_args()
@@ -179,6 +180,10 @@ def set_money():
 
     if not user_id:
         user = api.get_user_by_minecraft(minecraft)['result']
+        user_id = user['_id']
+    elif not minecraft:
+        telegram = int(telegram)
+        user = api.get_user_by_tg_id(telegram)['result']
         user_id = user['_id']
 
     return api.set_money(user_id, count)
@@ -189,8 +194,9 @@ def set_money():
 def inc_money():
     user_id = request.args.get('user_id')
     minecraft = request.args.get('minecraft')
+    telegram = request.args.get('telegram')
     count = request.args.get('count')
-    if not user_id and not minecraft:
+    if not user_id and not minecraft and not telegram:
         return api.errors.missing_args()
     if not count:
         return api.errors.missing_args()
@@ -203,6 +209,10 @@ def inc_money():
     if not user_id:
         user = api.get_user_by_minecraft(minecraft)['result']
         user_id = user['_id']
+    elif not minecraft:
+        telegram = int(telegram)
+        user = api.get_user_by_tg_id(telegram)['result']
+        user_id = user['_id']
 
     return api.increase_money(user_id, count)
 
@@ -212,8 +222,9 @@ def inc_money():
 def dec_money():
     user_id = request.args.get('user_id')
     minecraft = request.args.get('minecraft')
+    telegram = request.args.get('telegram')
     count = request.args.get('count')
-    if not user_id and not minecraft:
+    if not user_id and not minecraft and not telegram:
         return api.errors.missing_args()
     if not count:
         return api.errors.missing_args()
@@ -225,6 +236,10 @@ def dec_money():
 
     if not user_id:
         user = api.get_user_by_minecraft(minecraft)['result']
+        user_id = user['_id']
+    elif not minecraft:
+        telegram = int(telegram)
+        user = api.get_user_by_tg_id(telegram)['result']
         user_id = user['_id']
 
     return api.decrease_money(user_id, count)

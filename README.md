@@ -70,6 +70,8 @@ auth_string - String. (tg id, minecraft nickname, etc.)
 `/set_money?user_id=<user_id>&count=<count>`
 or
 `/set_money?minecraft=<minecraft_nickname>&count=<count>`
+or 
+`/set_money?telegram=<telegram_id>&count=<count>`
 
 Returns Ok object. Creates and returns new user if not exist.
 
@@ -78,12 +80,16 @@ user_id - Integer.
 count - Integer.
 
 minecraft_nickname - String.
+
+telegram_id - Integer.
 
 
 
 `/inc_money?user_id=<user_id>&count=<count>`
 or
 `/inc_money?minecraft=<minecraft_nickname>&count=<count>`
+or 
+`/inc_money?telegram=<telegram_id>&count=<count>`
 
 Returns Ok object. Creates and returns new user if not exist.
 
@@ -92,12 +98,16 @@ user_id - Integer.
 count - Integer.
 
 minecraft_nickname - String.
+
+telegram_id - Integer.
 
 
 
 `/dec_money?user_id=<user_id>&count=<count>`
 or
 `/dec_money?minecraft=<minecraft_nickname>&count=<count>`
+or 
+`/dec_money?telegram=<telegram_id>&count=<count>`
 
 Returns Ok object. Creates and returns new user if not exist.
 
@@ -106,6 +116,8 @@ user_id - Integer.
 count - Integer.
 
 minecraft_nickname - String.
+
+telegram_id - Integer.
 
 
 
