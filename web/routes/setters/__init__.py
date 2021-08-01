@@ -106,7 +106,7 @@ def remove_nickname():
 
 @app.route('/set_money_tg')
 @require_token
-def set_money():
+def set_money_tg():
     telegram = request.args.get('telegram')
     count = request.args.get('count')
     if not telegram or not count:
@@ -123,7 +123,7 @@ def set_money():
 
 @app.route('/inc_money_tg')
 @require_token
-def set_money():
+def inc_money_tg():
     telegram = request.args.get('telegram')
     count = request.args.get('count')
     if not telegram or not count:
@@ -143,7 +143,7 @@ def set_money():
 
 @app.route('/dec_money_tg')
 @require_token
-def set_money():
+def dec_money_tg():
     telegram = request.args.get('telegram')
     count = request.args.get('count')
     if not telegram or not count:
